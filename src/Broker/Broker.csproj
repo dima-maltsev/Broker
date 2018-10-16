@@ -5,6 +5,7 @@
     <Description>Simple broker for sending in-proc messages</Description>
     <Authors>Dmitry Maltsev</Authors>
     <PackageId>Broker</PackageId>
+    <PackageIconUrl>https://raw.githubusercontent.com/dmalcev/Broker/master/assets/logo_128_128.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/dmalcev/Broker/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/dmalcev/Broker</PackageProjectUrl>
     <PackageTags>broker;cqrs;commands;events;messages;handlers</PackageTags>
