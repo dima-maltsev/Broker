@@ -37,6 +37,8 @@ namespace Broker.Extensions.Microsoft.DependencyInjection
 
         private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
         {
+            assemblies = assemblies ?? Enumerable.Empty<Assembly>();
+
             var descriptors =
                 from a in assemblies
                 from t in a.DefinedTypes
