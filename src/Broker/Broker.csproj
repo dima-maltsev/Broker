@@ -1,7 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard1.3;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.3;netstandard2.0</TargetFrameworks>
+    <Description>Simple broker for sending in-proc messages</Description>
+    <Authors>Dmitry Maltsev</Authors>
+    <PackageId>Broker</PackageId>
+    <PackageLicenseUrl>https://github.com/dmalcev/Broker/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/dmalcev/Broker</PackageProjectUrl>
+    <PackageTags>broker;cqrs;commands;events;messages;handlers</PackageTags>
+    <RepositoryUrl>git://github.com/dmalcev/Broker</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
 </Project>
