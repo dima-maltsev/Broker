@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Broker.Extensions.Microsoft.DependencyInjection
 {
-    public class ServiceFactory : IServiceFactory
+    internal class ServiceFactory : IServiceFactory
     {
         private readonly IServiceProvider _provider;
 
