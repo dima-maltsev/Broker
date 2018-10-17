@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,6 +15,11 @@ namespace Broker
 
         public async Task SendAsync<TMessage>(TMessage message)
         {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
             var handler = _factory.GetService<IHandle<TMessage>>();
             if (handler == null)
             {
@@ -35,6 +40,11 @@ namespace Broker
 
         public async Task PublishAsync<TMessage>(TMessage message)
         {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
             var handlers = _factory.GetServices<IHandle<TMessage>>();
             var pipelines = _factory.GetServices<IPipeline<TMessage>>().Reverse().ToList();
 
