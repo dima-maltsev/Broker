@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Broker.Samples.Messages;
 
 namespace Broker.Samples.Handlers
 {
     public abstract class BaseHandler : IHandle<GreetingMessage>
     {
-        public abstract Task Handle(GreetingMessage message);
+        public abstract Task HandleAsync(GreetingMessage message);
     }
 }

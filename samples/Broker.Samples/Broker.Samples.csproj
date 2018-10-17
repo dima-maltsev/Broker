@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,8 +7,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
-    <PackageReference Include="Broker" Version="1.0.0" />
-    <PackageReference Include="Broker.Extensions.Microsoft.DependencyInjection" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Broker.Extensions.Microsoft.DependencyInjection\Broker.Extensions.Microsoft.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\src\Broker\Broker.csproj" />
   </ItemGroup>
 
 </Project>

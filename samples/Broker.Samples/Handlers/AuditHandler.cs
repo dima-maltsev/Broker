@@ -6,7 +6,7 @@ namespace Broker.Samples.Handlers
 {
     public class AuditHandler : IHandle<IAudit>
     {
-        public Task Handle(IAudit message)
+        public Task HandleAsync(IAudit message)
         {
             Console.WriteLine($"User: {message.User}");
             return Task.CompletedTask;

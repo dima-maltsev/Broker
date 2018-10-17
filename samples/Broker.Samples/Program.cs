@@ -20,9 +20,9 @@ namespace Broker.Samples
 
             var greetingMessage = new GreetingMessage { Name = "World", User = "User" };
 
-            broker.Send(greetingMessage);
-            broker.Publish(greetingMessage);
-            broker.Send<IAudit>(greetingMessage);
+            broker.SendAsync(greetingMessage);
+            broker.PublishAsync(greetingMessage);
+            broker.SendAsync<IAudit>(greetingMessage);
 
             Console.ReadKey();
         }

@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace Broker
 {
     public interface IBroker
     {
-        Task Send<TMessage>(TMessage message);
+        Task SendAsync<TMessage>(TMessage message);
 
-        Task Publish<TMessage>(TMessage message);
+        Task PublishAsync<TMessage>(TMessage message);
     }
 }
