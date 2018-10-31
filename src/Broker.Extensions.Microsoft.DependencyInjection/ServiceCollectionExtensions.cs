@@ -39,12 +39,14 @@ namespace Broker.Extensions.Microsoft.DependencyInjection
         {
             assemblies = assemblies ?? Enumerable.Empty<Assembly>();
 
+            var handlerTypes = new[] { typeof(IHandle<>), typeof(IQuery<,>) };
+
             var descriptors =
                 from a in assemblies
                 from t in a.DefinedTypes
                 where t.IsClass && !t.IsAbstract
                 from i in t.ImplementedInterfaces
-                where i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IHandle<>)
+                where i.IsGenericType && handlerTypes.Contains(i.GetGenericTypeDefinition())
                 select new { ServiceType = i, ImplementationType = t };
 
             foreach (var descriptor in descriptors)

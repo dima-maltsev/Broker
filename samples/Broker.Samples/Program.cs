@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Broker.Extensions.Microsoft.DependencyInjection;
 using Broker.Samples.Messages;
 using Broker.Samples.Pipelines;
@@ -8,7 +9,7 @@ namespace Broker.Samples
 {
     class Program
     {
-        static void Main()
+        static async Task Main()
         {
             var services = new ServiceCollection();
             services.AddBroker();
@@ -20,9 +21,12 @@ namespace Broker.Samples
 
             var greetingMessage = new GreetingMessage { Name = "World", User = "User" };
 
-            broker.SendAsync(greetingMessage);
-            broker.PublishAsync(greetingMessage);
-            broker.SendAsync<IAudit>(greetingMessage);
+            /*
+            await broker.SendAsync(greetingMessage);
+            await broker.PublishAsync(greetingMessage);
+            await broker.SendAsync<IAudit>(greetingMessage);*/
+
+            var result = await broker.QueryAsync<GreetingMessage, string>(greetingMessage);
 
             Console.ReadKey();
         }
