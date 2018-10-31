@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace Broker
 {
-    public interface IPipeline<in TMessage>
+    public interface IPipeline<TMessage>
     {
-        Task ExecuteAsync(TMessage message, Func<Task> next);
+        Task ExecuteAsync(MessageContext<TMessage> context, Func<Task> next);
     }
 }

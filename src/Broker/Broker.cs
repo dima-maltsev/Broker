@@ -28,12 +28,14 @@ namespace Broker
 
             var pipelines = _factory.GetServices<IPipeline<TMessage>>();
 
+            var context = new MessageContext<TMessage>(message);
+
             Task HandlerAction() => handler.HandleAsync(message);
 
             var runner = pipelines
                 .Reverse()
                 .Aggregate((Func<Task>) HandlerAction,
-                    (next, pipeline) => () => pipeline.ExecuteAsync(message, next));
+                    (next, pipeline) => () => pipeline.ExecuteAsync(context, next));
 
             await runner().ConfigureAwait(false);
         }
@@ -48,13 +50,15 @@ namespace Broker
             var handlers = _factory.GetServices<IHandle<TMessage>>();
             var pipelines = _factory.GetServices<IPipeline<TMessage>>().Reverse().ToList();
 
+            var context = new MessageContext<TMessage>(message);
+
             foreach (var handler in handlers)
             {
                 Task HandlerAction() => handler.HandleAsync(message);
 
                 var runner = pipelines
                     .Aggregate((Func<Task>) HandlerAction,
-                        (next, pipeline) => () => pipeline.ExecuteAsync(message, next));
+                        (next, pipeline) => () => pipeline.ExecuteAsync(context, next));
 
                 await runner().ConfigureAwait(false);
             }

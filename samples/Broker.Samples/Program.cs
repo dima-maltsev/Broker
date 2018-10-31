@@ -21,12 +21,12 @@ namespace Broker.Samples
 
             var greetingMessage = new GreetingMessage { Name = "World", User = "User" };
 
-            /*
             await broker.SendAsync(greetingMessage);
             await broker.PublishAsync(greetingMessage);
-            await broker.SendAsync<IAudit>(greetingMessage);*/
+            await broker.SendAsync<IAudit>(greetingMessage);
 
             var result = await broker.QueryAsync<GreetingMessage, string>(greetingMessage);
+            Console.WriteLine(result);
 
             Console.ReadKey();
         }
