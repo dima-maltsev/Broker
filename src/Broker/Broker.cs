@@ -77,8 +77,23 @@ namespace Broker
                 throw new InvalidOperationException($"Message {message.GetType()} has no handlers registered");
             }
 
-            var result = await handler.QueryAsync(message).ConfigureAwait(false);
-            return result;
+            var pipelines = _factory.GetServices<IPipeline<TMessage>>();
+
+            var context = new QueryContext<TMessage, TResult>(message);
+
+            async Task HandlerAction()
+            {
+                context.Result = await handler.QueryAsync(message);
+            }
+
+            var runner = pipelines
+                .Reverse()
+                .Aggregate((Func<Task>) HandlerAction,
+                    (next, pipeline) => () => pipeline.ExecuteAsync(context, next));
+
+            await runner().ConfigureAwait(false);
+
+            return context.Result;
         }
     }
 }
