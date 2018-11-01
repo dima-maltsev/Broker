@@ -15,8 +15,8 @@ namespace Broker.Samples
             services.AddBroker();
             services.AddTransient(typeof(IPipeline<>), typeof(GenericPipeline<>));
             services.AddTransient(typeof(IPipeline<GreetingMessage>), typeof(GreetingPipeline));
-            services.AddTransient(typeof(IQueryPipeline<,>), typeof(GenericQueryPipeline<,>));
-            services.AddTransient(typeof(IQueryPipeline<GreetingMessage, string>), typeof(GreetingQueryPipeline));
+            services.AddTransient(typeof(IPipeline<,>), typeof(GenericQueryPipeline<,>));
+            services.AddTransient(typeof(IPipeline<GreetingMessage, string>), typeof(GreetingQueryPipeline));
 
             var provider = services.BuildServiceProvider();
             var broker = provider.GetService<IBroker>();
@@ -27,7 +27,7 @@ namespace Broker.Samples
             await broker.PublishAsync(greetingMessage);
             await broker.SendAsync<IAudit>(greetingMessage);
 
-            var result = await broker.QueryAsync<GreetingMessage, string>(greetingMessage);
+            var result = await broker.SendAsync<GreetingMessage, string>(greetingMessage);
             Console.WriteLine(result);
 
             Console.ReadKey();

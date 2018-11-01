@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Broker.Samples.Pipelines
 {
-    public class GenericQueryPipeline<TMessage, TResult> : IQueryPipeline<TMessage, TResult>
+    public class GenericQueryPipeline<TMessage, TResult> : IPipeline<TMessage, TResult>
     {
         public async Task<TResult> ExecuteAsync(TMessage message, Func<Task<TResult>> next)
         {

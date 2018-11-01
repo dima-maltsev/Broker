@@ -39,7 +39,7 @@ namespace Broker.Extensions.Microsoft.DependencyInjection
         {
             assemblies = assemblies ?? Enumerable.Empty<Assembly>();
 
-            var handlerTypes = new[] { typeof(IHandle<>), typeof(IQuery<,>) };
+            var handlerTypes = new[] { typeof(IHandle<>), typeof(IHandle<,>) };
 
             var descriptors =
                 from a in assemblies

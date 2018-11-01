@@ -7,8 +7,8 @@ namespace Broker
         Task HandleAsync(TMessage message);
     }
 
-    public interface IQuery<in TMessage, TResult>
+    public interface IHandle<in TMessage, TResult>
     {
-        Task<TResult> QueryAsync(TMessage message);
+        Task<TResult> HandleAsync(TMessage message);
     }
 }

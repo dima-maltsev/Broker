@@ -4,7 +4,7 @@ using Broker.Samples.Messages;
 
 namespace Broker.Samples.Pipelines
 {
-    public class GreetingQueryPipeline : IQueryPipeline<GreetingMessage, string>
+    public class GreetingQueryPipeline : IPipeline<GreetingMessage, string>
     {
         public async Task<string> ExecuteAsync(GreetingMessage message, Func<Task<string>> next)
         {

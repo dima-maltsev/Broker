@@ -3,9 +3,9 @@ using Broker.Samples.Messages;
 
 namespace Broker.Samples.Handlers
 {
-    public class GreetingQueryHandler : IQuery<GreetingMessage, string>
+    public class GreetingHandleHandler : IHandle<GreetingMessage, string>
     {
-        public Task<string> QueryAsync(GreetingMessage message)
+        public Task<string> HandleAsync(GreetingMessage message)
         {
             return Task.FromResult($"Hello, {message.Name}");
         }

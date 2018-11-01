@@ -60,22 +60,22 @@ namespace Broker
             }
         }
 
-        public async Task<TResult> QueryAsync<TMessage, TResult>(TMessage message)
+        public async Task<TResult> SendAsync<TMessage, TResult>(TMessage message)
         {
             if (message == null)
             {
                 throw new ArgumentNullException(nameof(message));
             }
 
-            var handler = _factory.GetService<IQuery<TMessage, TResult>>();
+            var handler = _factory.GetService<IHandle<TMessage, TResult>>();
             if (handler == null)
             {
                 throw new InvalidOperationException($"Message {message.GetType()} has no handlers registered");
             }
 
-            var pipelines = _factory.GetServices<IQueryPipeline<TMessage, TResult>>();
+            var pipelines = _factory.GetServices<IPipeline<TMessage, TResult>>();
 
-            Task<TResult> HandlerAction() => handler.QueryAsync(message);
+            Task<TResult> HandlerAction() => handler.HandleAsync(message);
 
             var runner = pipelines
                 .Reverse()
