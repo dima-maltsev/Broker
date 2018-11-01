@@ -4,13 +4,16 @@ using Broker.Samples.Messages;
 
 namespace Broker.Samples.Pipelines
 {
-    public class GreetingQueryPipeline : QueryPipeline<GreetingMessage, string>
+    public class GreetingQueryPipeline : IQueryPipeline<GreetingMessage, string>
     {
-        protected override async Task ExecuteQueryAsync(QueryContext<GreetingMessage, string> context, Func<Task> next)
+        public async Task<string> ExecuteAsync(GreetingMessage message, Func<Task<string>> next)
         {
-            await next();
-            context.Result += "_Added";
-            Console.WriteLine(context.Result);
+            Console.WriteLine("Before typed");
+            var result = await next();
+            result += "_Added";
+            Console.WriteLine(result);
+            Console.WriteLine("After typed");
+            return result;
         }
     }
 }

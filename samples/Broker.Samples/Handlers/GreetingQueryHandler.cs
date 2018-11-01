@@ -3,7 +3,7 @@ using Broker.Samples.Messages;
 
 namespace Broker.Samples.Handlers
 {
-    public class QueryHandler : IQuery<GreetingMessage, string>
+    public class GreetingQueryHandler : IQuery<GreetingMessage, string>
     {
         public Task<string> QueryAsync(GreetingMessage message)
         {

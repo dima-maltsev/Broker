@@ -28,14 +28,12 @@ namespace Broker
 
             var pipelines = _factory.GetServices<IPipeline<TMessage>>();
 
-            var context = new MessageContext<TMessage>(message);
-
             Task HandlerAction() => handler.HandleAsync(message);
 
             var runner = pipelines
                 .Reverse()
                 .Aggregate((Func<Task>) HandlerAction,
-                    (next, pipeline) => () => pipeline.ExecuteAsync(context, next));
+                    (next, pipeline) => () => pipeline.ExecuteAsync(message, next));
 
             await runner().ConfigureAwait(false);
         }
@@ -50,15 +48,13 @@ namespace Broker
             var handlers = _factory.GetServices<IHandle<TMessage>>();
             var pipelines = _factory.GetServices<IPipeline<TMessage>>().Reverse().ToList();
 
-            var context = new MessageContext<TMessage>(message);
-
             foreach (var handler in handlers)
             {
                 Task HandlerAction() => handler.HandleAsync(message);
 
                 var runner = pipelines
                     .Aggregate((Func<Task>) HandlerAction,
-                        (next, pipeline) => () => pipeline.ExecuteAsync(context, next));
+                        (next, pipeline) => () => pipeline.ExecuteAsync(message, next));
 
                 await runner().ConfigureAwait(false);
             }
@@ -77,23 +73,16 @@ namespace Broker
                 throw new InvalidOperationException($"Message {message.GetType()} has no handlers registered");
             }
 
-            var pipelines = _factory.GetServices<IPipeline<TMessage>>();
+            var pipelines = _factory.GetServices<IQueryPipeline<TMessage, TResult>>();
 
-            var context = new QueryContext<TMessage, TResult>(message);
-
-            async Task HandlerAction()
-            {
-                context.Result = await handler.QueryAsync(message);
-            }
+            Task<TResult> HandlerAction() => handler.QueryAsync(message);
 
             var runner = pipelines
                 .Reverse()
-                .Aggregate((Func<Task>) HandlerAction,
-                    (next, pipeline) => () => pipeline.ExecuteAsync(context, next));
+                .Aggregate((Func<Task<TResult>>) HandlerAction,
+                    (next, pipeline) => () => pipeline.ExecuteAsync(message, next));
 
-            await runner().ConfigureAwait(false);
-
-            return context.Result;
+            return await runner().ConfigureAwait(false);
         }
     }
 }
