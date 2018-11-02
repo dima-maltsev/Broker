@@ -59,5 +59,30 @@ namespace Broker
                 await runner().ConfigureAwait(false);
             }
         }
+
+        public async Task<TResult> SendAsync<TMessage, TResult>(TMessage message)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            var handler = _factory.GetService<IHandle<TMessage, TResult>>();
+            if (handler == null)
+            {
+                throw new InvalidOperationException($"Message {message.GetType()} has no handlers registered");
+            }
+
+            var pipelines = _factory.GetServices<IPipeline<TMessage, TResult>>();
+
+            Task<TResult> HandlerAction() => handler.HandleAsync(message);
+
+            var runner = pipelines
+                .Reverse()
+                .Aggregate((Func<Task<TResult>>) HandlerAction,
+                    (next, pipeline) => () => pipeline.ExecuteAsync(message, next));
+
+            return await runner().ConfigureAwait(false);
+        }
     }
 }

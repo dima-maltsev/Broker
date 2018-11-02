@@ -7,4 +7,9 @@ namespace Broker
     {
         Task ExecuteAsync(TMessage message, Func<Task> next);
     }
+
+    public interface IPipeline<in TMessage, TResult>
+    {
+        Task<TResult> ExecuteAsync(TMessage message, Func<Task<TResult>> next);
+    }
 }

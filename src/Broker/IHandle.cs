@@ -6,4 +6,9 @@ namespace Broker
     {
         Task HandleAsync(TMessage message);
     }
+
+    public interface IHandle<in TMessage, TResult>
+    {
+        Task<TResult> HandleAsync(TMessage message);
+    }
 }

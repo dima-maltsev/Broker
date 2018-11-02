@@ -19,9 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Broker">
-      <HintPath>..\..\..\..\..\.nuget\packages\broker\1.0.0\lib\netstandard2.0\Broker.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Broker\Broker.csproj" />
   </ItemGroup>
 
 </Project>
