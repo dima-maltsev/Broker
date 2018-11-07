@@ -8,19 +8,11 @@ namespace Broker.Extensions.Microsoft.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddBroker(this IServiceCollection services)
-        {
-            var assemblies = AppDomain.CurrentDomain
-                .GetAssemblies()
-                .Where(a => !a.IsDynamic);
+        public static IServiceCollection AddBroker(this IServiceCollection services) =>
+            services.AddBroker(AppDomain.CurrentDomain.GetAssemblies().Where(a => !a.IsDynamic));
 
-            return services.AddBroker(assemblies);
-        }
-
-        public static IServiceCollection AddBroker(this IServiceCollection services, params Assembly[] assemblies)
-        {
-            return services.AddBroker(assemblies.AsEnumerable());
-        }
+        public static IServiceCollection AddBroker(this IServiceCollection services, params Assembly[] assemblies) =>
+            services.AddBroker(assemblies.AsEnumerable());
 
         public static IServiceCollection AddBroker(this IServiceCollection services, IEnumerable<Assembly> assemblies)
         {
@@ -37,7 +29,7 @@ namespace Broker.Extensions.Microsoft.DependencyInjection
 
         private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
         {
-            assemblies = assemblies ?? Enumerable.Empty<Assembly>();
+            assemblies = (assemblies as Assembly[] ?? assemblies).Distinct().ToArray();
 
             var handlerTypes = new[] { typeof(IHandle<>), typeof(IHandle<,>) };
 

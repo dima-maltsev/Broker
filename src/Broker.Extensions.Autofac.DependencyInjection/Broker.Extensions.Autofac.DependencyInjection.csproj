@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+      <TargetFramework>netstandard2.0</TargetFramework>
+      <Description>Broker extension for Autofac</Description>
+      <Authors>Dmitry Maltsev</Authors>
+      <PackageId>Broker.Extensions.Autofac.DependencyInjection</PackageId>
+      <PackageIconUrl>https://raw.githubusercontent.com/dmalcev/Broker/master/assets/logo_128_128.png</PackageIconUrl>
+      <PackageLicenseUrl>https://github.com/dmalcev/Broker/blob/master/LICENSE</PackageLicenseUrl>
+      <PackageProjectUrl>https://github.com/dmalcev/Broker</PackageProjectUrl>
+      <RepositoryUrl>git://github.com/dmalcev/Broker</RepositoryUrl>
+      <RepositoryType>git</RepositoryType>
+      <PackageTags>broker;dependency injeciton;autofac</PackageTags>
+      <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Broker\Broker.csproj" />
+  </ItemGroup>
+
+</Project>

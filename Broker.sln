@@ -5,13 +5,15 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker", "src\Broker\Broker.csproj", "{4764AA20-7E55-4AE7-91D6-AD4193380193}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Extensions.Microsoft.DependencyInjection", "src\Broker.Extensions.Microsoft.DependencyInjection\Broker.Extensions.Microsoft.DependencyInjection.csproj", "{C03974C3-8D93-4397-835D-E805AE623DCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Extensions.Microsoft.DependencyInjection", "src\Broker.Extensions.Microsoft.DependencyInjection\Broker.Extensions.Microsoft.DependencyInjection.csproj", "{C03974C3-8D93-4397-835D-E805AE623DCB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{CA8783A3-1900-4A81-90B1-00A5957187AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3C1DFEA6-14C8-40C3-B3BA-D7AEABAFA1CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Broker.Samples", "samples\Broker.Samples\Broker.Samples.csproj", "{7F63F342-2B92-4BBD-B066-3CD6A460EFA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Broker.Extensions.Autofac.DependencyInjection", "src\Broker.Extensions.Autofac.DependencyInjection\Broker.Extensions.Autofac.DependencyInjection.csproj", "{BA157175-F5C1-40C3-9865-59BAD44F9539}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,18 @@ Global
 		{7F63F342-2B92-4BBD-B066-3CD6A460EFA3}.Release|x64.Build.0 = Release|Any CPU
 		{7F63F342-2B92-4BBD-B066-3CD6A460EFA3}.Release|x86.ActiveCfg = Release|Any CPU
 		{7F63F342-2B92-4BBD-B066-3CD6A460EFA3}.Release|x86.Build.0 = Release|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Debug|x64.Build.0 = Debug|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Debug|x86.Build.0 = Debug|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Release|x64.ActiveCfg = Release|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Release|x64.Build.0 = Release|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Release|x86.ActiveCfg = Release|Any CPU
+		{BA157175-F5C1-40C3-9865-59BAD44F9539}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +81,7 @@ Global
 		{4764AA20-7E55-4AE7-91D6-AD4193380193} = {3C1DFEA6-14C8-40C3-B3BA-D7AEABAFA1CB}
 		{C03974C3-8D93-4397-835D-E805AE623DCB} = {3C1DFEA6-14C8-40C3-B3BA-D7AEABAFA1CB}
 		{7F63F342-2B92-4BBD-B066-3CD6A460EFA3} = {CA8783A3-1900-4A81-90B1-00A5957187AD}
+		{BA157175-F5C1-40C3-9865-59BAD44F9539} = {3C1DFEA6-14C8-40C3-B3BA-D7AEABAFA1CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C55E5200-C383-442F-AAF5-69A5A8A10E4A}
