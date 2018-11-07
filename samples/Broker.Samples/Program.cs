@@ -1,12 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Autofac;
-using Broker.Extensions.Autofac.DependencyInjection;
-using Broker.Extensions.Microsoft.DependencyInjection;
 using Broker.Samples.Messages;
-using Broker.Samples.Pipelines;
 using Broker.Samples.Registars;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Broker.Samples
 {
