@@ -1,8 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using Autofac;
+using Broker.Extensions.Autofac.DependencyInjection;
 using Broker.Extensions.Microsoft.DependencyInjection;
 using Broker.Samples.Messages;
 using Broker.Samples.Pipelines;
+using Broker.Samples.Registars;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Broker.Samples
@@ -11,24 +14,31 @@ namespace Broker.Samples
     {
         static async Task Main()
         {
-            var services = new ServiceCollection();
-            services.AddBroker();
-            services.AddTransient(typeof(IPipeline<>), typeof(GenericPipeline<>));
-            services.AddTransient(typeof(IPipeline<GreetingMessage>), typeof(GreetingPipeline));
-            services.AddTransient(typeof(IPipeline<,>), typeof(GenericQueryPipeline<,>));
-            services.AddTransient(typeof(IPipeline<GreetingMessage, string>), typeof(GreetingQueryPipeline));
-
-            var provider = services.BuildServiceProvider();
-            var broker = provider.GetService<IBroker>();
+            var registars = new IRegistar[]
+            {
+                new ServiceCollectionRegistar(),
+                new AutofacRegistar()
+            };
 
             var greetingMessage = new GreetingMessage { Name = "World", User = "User" };
 
-            await broker.SendAsync(greetingMessage);
-            await broker.PublishAsync(greetingMessage);
-            await broker.SendAsync<IAudit>(greetingMessage);
+            foreach (var registar in registars)
+            {
+                Console.WriteLine($"Running {registar.GetType().Name}");
+                Console.WriteLine();
 
-            var result = await broker.SendAsync<GreetingMessage, string>(greetingMessage);
-            Console.WriteLine(result);
+                var broker = registar.Register();
+
+                await broker.SendAsync(greetingMessage);
+                await broker.PublishAsync(greetingMessage);
+                await broker.SendAsync<IAudit>(greetingMessage);
+
+                var result = await broker.SendAsync<GreetingMessage, string>(greetingMessage);
+                Console.WriteLine(result);
+
+                Console.WriteLine();
+                Console.WriteLine();
+            }
 
             Console.ReadKey();
         }
